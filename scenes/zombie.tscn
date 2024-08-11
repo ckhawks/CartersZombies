@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqimi5en3gdp5"]
+
+[ext_resource type="Script" path="res://scenes/Zombie.gd" id="1_3et68"]
+[ext_resource type="Texture2D" uid="uid://06awmp21ms5v" path="res://sprites/temporary/preview_355.png" id="2_ctvq7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q1rnb"]
+radius = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v26w"]
+size = Vector2(21, 28)
+
+[node name="Zombie" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_3et68")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 20.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(12, 0)
+texture = ExtResource("2_ctvq7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q1rnb")
+
+[node name="HurtArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D"]
+position = Vector2(21.5, 0)
+shape = SubResource("RectangleShape2D_7v26w")
+
+[node name="HurtTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="LocateTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="body_entered" from="HurtArea2D" to="." method="_on_hurt_area_2d_body_entered"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
+[connection signal="timeout" from="LocateTimer" to="." method="_on_locate_timer_timeout"]

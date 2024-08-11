@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ControlsResource" load_steps=2 format=3 uid="uid://bvr05hkd2gocs"]
+
+[ext_resource type="Script" path="res://resources/ControlsResource.gd" id="1_1heto"]
+
+[resource]
+script = ExtResource("1_1heto")
+move_left = "p2_move_left"
+move_right = "p2_move_right"
+move_up = "p2_move_up"
+move_down = "p2_move_down"
+look_left = "p2_look_left"
+look_right = "p2_look_right"
+look_up = "p2_look_up"
+look_down = "p2_look_down"
+primary_fire = "p2_primary_fire"
+secondary_fire = "p2_secondary_fire"
+interact = "p2_interact"
+reload = "p2_reload"
+movement = "p2_movement"
+sprint = "p2_sprint"

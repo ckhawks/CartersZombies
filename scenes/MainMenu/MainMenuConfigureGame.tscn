@@ -1,0 +1,138 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfs3qhllqus55"]
+
+[ext_resource type="Texture2D" uid="uid://dr6aqvxqtqkxs" path="res://sprites/temporary/main_menu_bg.png" id="1_dsqmc"]
+[ext_resource type="Script" path="res://scenes/MainMenu/MainMenuConfigureGame.gd" id="1_q160x"]
+[ext_resource type="Script" path="res://scenes/MainMenu/CreditsBackButton.gd" id="2_cme2y"]
+[ext_resource type="FontFile" uid="uid://dauhl3vqov0v3" path="res://fonts/Retro Team.otf" id="3_xnvnj"]
+[ext_resource type="PackedScene" uid="uid://dws81o61weqf1" path="res://scenes/MainMenu/MainMenuPlayerCustomizerComponent.tscn" id="4_rxovx"]
+[ext_resource type="Resource" uid="uid://df0mukm0i0smc" path="res://p1_controls.tres" id="6_ecpwa"]
+
+[node name="MainMenuConfigureGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q160x")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_dsqmc")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 453.0
+offset_bottom = 423.0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_bottom = 16
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Back to Main Menu"
+script = ExtResource("2_cme2y")
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xnvnj")
+theme_override_font_sizes/font_size = 100
+text = "CONFIGURE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="NumberOfPlayersLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Number of players"
+
+[node name="NumberOfPlayersHSlider" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+tick_count = 4
+ticks_on_borders = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="MapLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer3/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Map"
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer3/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+allow_reselect = true
+auto_height = true
+item_count = 2
+item_0/text = "Starter Map"
+item_1/text = "Map #2"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+
+[node name="PlayerCustomizersHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PlayerCustomizerComponent" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/PlayerCustomizersHBox" instance=ExtResource("4_rxovx")]
+layout_mode = 2
+playerControls = ExtResource("6_ecpwa")
+
+[node name="Control" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="StartButton" type="Button" parent="Control"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xnvnj")
+theme_override_font_sizes/font_size = 64
+text = "Start MISSION"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/BackButton" to="MarginContainer/VBoxContainer/MarginContainer/BackButton" method="_on_pressed"]
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/VBoxContainer2/NumberOfPlayersHSlider" to="." method="_on_number_of_players_h_slider_drag_ended"]
+[connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]

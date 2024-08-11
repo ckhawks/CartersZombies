@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://sjtpiqiu02n4"]
+
+[ext_resource type="Script" path="res://scenes/Window.gd" id="1_u233s"]
+[ext_resource type="Texture2D" uid="uid://dr78u1qxy6yfp" path="res://sprites/windowA_4.png" id="2_xcc2n"]
+[ext_resource type="Script" path="res://scenes/WindowRepairArea.gd" id="3_bv70n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6s406"]
+size = Vector2(56, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqf7f"]
+size = Vector2(36, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldvvr"]
+size = Vector2(82, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lypw1"]
+size = Vector2(82, 20)
+
+[node name="Window" type="StaticBody2D"]
+position = Vector2(607, 636)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_u233s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_xcc2n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6s406")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-46, 0)
+shape = SubResource("RectangleShape2D_lqf7f")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_lqf7f")
+
+[node name="RepairArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RepairArea2D"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_ldvvr")
+
+[node name="DamageArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea2D"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_lypw1")
+
+[node name="DamageTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RepairTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, -14)
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="Node2D"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+text = "4/4"
+horizontal_alignment = 1
+
+[node name="WindowRepairArea" type="StaticBody2D" parent="." groups=["interactable"]]
+script = ExtResource("3_bv70n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WindowRepairArea"]
+shape = SubResource("RectangleShape2D_6s406")
+
+[connection signal="body_entered" from="RepairArea2D" to="." method="_on_repair_area_2d_body_entered"]
+[connection signal="body_exited" from="RepairArea2D" to="." method="_on_repair_area_2d_body_exited"]
+[connection signal="body_entered" from="DamageArea2D" to="." method="_on_damage_area_2d_body_entered"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
+[connection signal="timeout" from="RepairTimer" to="." method="_on_repair_timer_timeout"]

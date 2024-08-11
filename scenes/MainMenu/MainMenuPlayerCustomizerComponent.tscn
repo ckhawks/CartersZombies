@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://dws81o61weqf1"]
+
+[ext_resource type="Script" path="res://scenes/MainMenu/MainMenuPlayerCustomizerComponent.gd" id="1_kswl3"]
+[ext_resource type="FontFile" uid="uid://dauhl3vqov0v3" path="res://fonts/Retro Team.otf" id="1_snr2u"]
+[ext_resource type="Texture2D" uid="uid://cslpgb56k045x" path="res://icon.svg" id="3_d5hln"]
+
+[node name="MarginContainer2" type="MarginContainer"]
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+script = ExtResource("1_kswl3")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PlayerTitle" type="Label" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_snr2u")
+theme_override_font_sizes/font_size = 64
+text = "Player 1"
+
+[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Player 1"
+
+[node name="ColorPicker" type="ColorPicker" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+edit_alpha = false
+picker_shape = 2
+sampler_visible = false
+color_modes_visible = false
+sliders_visible = false
+hex_visible = false
+presets_visible = false
+
+[node name="RandomizeColorButton" type="Button" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Randomize Color"
+
+[node name="TestCharacterNode2D" type="CharacterBody2D" parent="VBoxContainer2"]
+unique_name_in_owner = true
+position = Vector2(32, 500)
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer2/TestCharacterNode2D"]
+texture = ExtResource("3_d5hln")
+
+[connection signal="color_changed" from="VBoxContainer2/ColorPicker" to="." method="_on_color_picker_color_changed"]
+[connection signal="pressed" from="VBoxContainer2/RandomizeColorButton" to="." method="_on_randomize_color_button_pressed"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0tslwg6yyrrp"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_6oppt"]
+[ext_resource type="Script" path="res://scenes/GlobalAudioManager.gd" id="7_tt8p1"]
+[ext_resource type="AudioStream" uid="uid://c14qi7rjemthe" path="res://sounds/temporary/wave_grace_start_1.mp3" id="8_vqpay"]
+[ext_resource type="AudioStream" uid="uid://lick2236x2yp" path="res://sounds/temporary/wave_grace_start_2_clock.mp3" id="9_kih3k"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_6oppt")
+
+[node name="GlobalAudioManager" type="Node" parent="."]
+script = ExtResource("7_tt8p1")
+
+[node name="WaveGraceStart1AudioPlayer" type="AudioStreamPlayer" parent="GlobalAudioManager"]
+stream = ExtResource("8_vqpay")
+volume_db = -10.759
+
+[node name="WaveGraceStart2AudioPlayer" type="AudioStreamPlayer" parent="GlobalAudioManager"]
+stream = ExtResource("9_kih3k")
+volume_db = -10.58
+
+[node name="SubViewport" type="SubViewport" parent="."]

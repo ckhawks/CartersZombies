@@ -1,0 +1,242 @@
+[gd_scene load_steps=10 format=3 uid="uid://cl1vmriix40ni"]
+
+[ext_resource type="Resource" uid="uid://df0mukm0i0smc" path="res://p1_controls.tres" id="2_5akqi"]
+[ext_resource type="PackedScene" uid="uid://b36fxj48d8vd6" path="res://scenes/player.tscn" id="2_8pa41"]
+[ext_resource type="Texture2D" uid="uid://c2sw16xcvnu61" path="res://sprites/temporary/wargames-terrain-mat-warzone-1.jpg" id="2_537kw"]
+[ext_resource type="PackedScene" uid="uid://cidpu5owj0tmr" path="res://scenes/wall_temp.tscn" id="4_vflt0"]
+[ext_resource type="Resource" uid="uid://bvr05hkd2gocs" path="res://p2_controls.tres" id="5_cxm5i"]
+[ext_resource type="PackedScene" uid="uid://sjtpiqiu02n4" path="res://scenes/window.tscn" id="6_s73du"]
+[ext_resource type="Script" path="res://scenes/Spawnpoint.gd" id="7_dwqv8"]
+[ext_resource type="PackedScene" uid="uid://bdqguahsqemn5" path="res://scenes/wall_weapon.tscn" id="8_uu87w"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vjba7"]
+vertices = PackedVector2Array(973, 617, 813, 617, 237, 600, 354, 521, 514, 521, 1306, 575, 21, 123, 20, 56, 786, 56, 1037, 306, 210, 306, 29, 200, 1109, 306, 858, 56, 1200, 56, 1200, 182, 1204, 306, 1204, 217, 29, 202, 25, 451, 210, 356, 77, 440, 1360, 182, 1364, 217, 1876, 56, 1891, 1022, 1811, 1022, 1811, 943, 977, 472, 977, 356, 1087, 356, 817, 472, 514, 361, 817, 356, 354, 361, 1159, 356, 1204, 356, 1204, 377, 1343, 538, 1364, 377, 1364, 356, 1838, 356, 1838, 306, 1364, 306, 1360, 56, 1651, 943, 1651, 1022, 1085, 1022, 1085, 830, 1650, 907, 1084, 830, 1084, 787, 1650, 787, 1810, 907, 1813, 787, 1810, 787, 1813, 737, 973, 737, 813, 737, 185, 737, 77, 600, 185, 787, 186, 787, 186, 908, 346, 908, 346, 787, 924, 787, 924, 908, 347, 952, 925, 908, 925, 1022, 347, 1022, 187, 952, 187, 1022, 34, 1022, 237, 440)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 12, 15, 17), PackedInt32Array(18, 11, 10), PackedInt32Array(19, 18, 10, 20, 21), PackedInt32Array(17, 15, 22, 23), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(28, 29, 30, 5), PackedInt32Array(28, 5, 4, 31), PackedInt32Array(31, 4, 32, 33), PackedInt32Array(20, 33, 32, 34), PackedInt32Array(35, 36, 37), PackedInt32Array(38, 35, 37), PackedInt32Array(38, 37, 39), PackedInt32Array(39, 40, 41), PackedInt32Array(42, 43, 23, 24), PackedInt32Array(22, 44, 24, 23), PackedInt32Array(45, 46, 47, 48, 49), PackedInt32Array(48, 50, 51, 52), PackedInt32Array(48, 52, 49), PackedInt32Array(45, 49, 53, 27), PackedInt32Array(24, 27, 53, 54), PackedInt32Array(53, 55, 54), PackedInt32Array(24, 54, 56, 41), PackedInt32Array(56, 57, 0, 5), PackedInt32Array(2, 1, 58, 59, 60), PackedInt32Array(61, 62, 63), PackedInt32Array(64, 65, 66, 67, 68), PackedInt32Array(67, 69, 70, 71, 68), PackedInt32Array(64, 68, 72, 63), PackedInt32Array(72, 73, 74, 19, 60), PackedInt32Array(20, 34, 3, 75), PackedInt32Array(38, 39, 41), PackedInt32Array(60, 59, 61), PackedInt32Array(60, 61, 63), PackedInt32Array(5, 38, 41, 56), PackedInt32Array(60, 63, 72), PackedInt32Array(21, 60, 19), PackedInt32Array(75, 21, 20), PackedInt32Array(2, 75, 3), PackedInt32Array(24, 41, 42)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-4, 31, 13, 202, 2, 1049, 1923, 1056, 1912, 30, 1205.77, 33.4619, 688, 36)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 16.0
+
+[node name="StartingLevel" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(573, 301)
+scale = Vector2(10.0391, 5.70313)
+texture = ExtResource("2_537kw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.813613, 0.738983, 0.628936, 0.603922)
+texture_filter = 1
+position = Vector2(573, 301)
+scale = Vector2(4.794, 2.723)
+texture = ExtResource("2_537kw")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Node2D"]
+navigation_polygon = SubResource("NavigationPolygon_vjba7")
+
+[node name="wallTemp4" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(434, 441)
+
+[node name="wallTemp6" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(893, 697)
+
+[node name="wallTemp7" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(897, 392)
+
+[node name="wallTemp8" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(1730, 827)
+
+[node name="wallTemp19" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(1731, 1023)
+
+[node name="wallTemp9" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(266, 828)
+
+[node name="wallTemp20" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(267, 1032)
+
+[node name="wallTemp10" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(1004, 828)
+
+[node name="wallTemp11" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(1005, 988)
+
+[node name="wallTemp12" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(1005, 910)
+
+[node name="wallTemp13" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(1280, 102)
+
+[node name="wallTemp18" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(1284, 297)
+
+[node name="wallTemp5" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(157, 520)
+
+[node name="wallTemp" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(1041, 1051)
+scale = Vector2(17.006, 0.202)
+
+[node name="wallTemp14" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(966, 27)
+scale = Vector2(17.006, 0.202)
+
+[node name="wallTemp15" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(1914, 622)
+rotation = 1.55642
+scale = Vector2(17.006, 0.202)
+
+[node name="wallTemp16" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(-1, 609)
+rotation = 1.55642
+scale = Vector2(17.006, 0.202)
+
+[node name="wallTemp2" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(1024, 331)
+scale = Vector2(12.4656, 0.148129)
+
+[node name="wallTemp17" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(999, 762)
+scale = Vector2(12.4656, 0.148129)
+
+[node name="wallTemp3" parent="Node2D/NavigationRegion2D" instance=ExtResource("4_vflt0")]
+position = Vector2(748, -18)
+rotation = 0.783522
+scale = Vector2(12.4656, 0.148129)
+
+[node name="Spawnpoint" type="Node2D" parent="." groups=["spawnpoints"]]
+position = Vector2(860, 973)
+script = ExtResource("7_dwqv8")
+
+[node name="EntropyTimer" type="Timer" parent="Spawnpoint"]
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="Spawnpoint"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 1)
+
+[node name="Spawnpoint2" type="Node2D" parent="." groups=["spawnpoints"]]
+position = Vector2(862, 844)
+script = ExtResource("7_dwqv8")
+
+[node name="EntropyTimer" type="Timer" parent="Spawnpoint2"]
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="Spawnpoint2"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 1)
+
+[node name="Spawnpoint3" type="Node2D" parent="." groups=["spawnpoints"]]
+position = Vector2(1152, 835)
+script = ExtResource("7_dwqv8")
+
+[node name="EntropyTimer" type="Timer" parent="Spawnpoint3"]
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="Spawnpoint3"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 1)
+
+[node name="Spawnpoint4" type="Node2D" parent="." groups=["spawnpoints"]]
+position = Vector2(918, 261)
+script = ExtResource("7_dwqv8")
+
+[node name="EntropyTimer" type="Timer" parent="Spawnpoint4"]
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="Spawnpoint4"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 1)
+
+[node name="Spawnpoint6" type="Node2D" parent="." groups=["spawnpoints"]]
+position = Vector2(1061, 109)
+script = ExtResource("7_dwqv8")
+
+[node name="EntropyTimer" type="Timer" parent="Spawnpoint6"]
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="Spawnpoint6"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 1)
+
+[node name="Spawnpoint5" type="Node2D" parent="." groups=["spawnpoints"]]
+position = Vector2(1274, 428)
+script = ExtResource("7_dwqv8")
+
+[node name="EntropyTimer" type="Timer" parent="Spawnpoint5"]
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="Spawnpoint5"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 1)
+
+[node name="Window" parent="." instance=ExtResource("6_s73du")]
+position = Vector2(1282, 196)
+rotation = -1.58504
+scale = Vector2(1.5, 1.5)
+
+[node name="Window2" parent="." instance=ExtResource("6_s73du")]
+position = Vector2(1729, 922)
+rotation = -1.597
+
+[node name="Window3" parent="." instance=ExtResource("6_s73du")]
+position = Vector2(260, 929)
+rotation = 1.54723
+scale = Vector2(1.5, 1.5)
+
+[node name="WallWeapon" parent="." instance=ExtResource("8_uu87w")]
+
+[node name="Player" parent="." instance=ExtResource("2_8pa41")]
+position = Vector2(1025, 629)
+playerName = "DEFAULT1"
+playerColor = Color(1, 0, 0.0166664, 1)
+controls = ExtResource("2_5akqi")
+
+[node name="Player2" parent="." instance=ExtResource("2_8pa41")]
+position = Vector2(1163, 620)
+playerIdx = 1
+playerName = "DEFAULT2"
+playerColor = Color(0, 0.6331, 0.435408, 1)
+controls = ExtResource("5_cxm5i")
+
+[node name="Player3" parent="." instance=ExtResource("2_8pa41")]
+position = Vector2(1092, 684)
+playerIdx = 2
+playerName = "DEFAULT3"
+playerColor = Color(0, 0.6331, 0.435408, 1)
+controls = ExtResource("5_cxm5i")
+
+[node name="Player4" parent="." instance=ExtResource("2_8pa41")]
+position = Vector2(1265, 629)
+playerIdx = 3
+playerName = "DEFAULT4"
+playerColor = Color(0, 0.6331, 0.435408, 1)
+controls = ExtResource("5_cxm5i")
+
+[connection signal="timeout" from="Spawnpoint/EntropyTimer" to="Spawnpoint" method="_on_entropy_timer_timeout"]
+[connection signal="timeout" from="Spawnpoint2/EntropyTimer" to="Spawnpoint2" method="_on_entropy_timer_timeout"]
+[connection signal="timeout" from="Spawnpoint3/EntropyTimer" to="Spawnpoint3" method="_on_entropy_timer_timeout"]
+[connection signal="timeout" from="Spawnpoint4/EntropyTimer" to="Spawnpoint4" method="_on_entropy_timer_timeout"]
+[connection signal="timeout" from="Spawnpoint6/EntropyTimer" to="Spawnpoint6" method="_on_entropy_timer_timeout"]
+[connection signal="timeout" from="Spawnpoint5/EntropyTimer" to="Spawnpoint5" method="_on_entropy_timer_timeout"]

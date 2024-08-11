@@ -1,0 +1,143 @@
+[gd_scene load_steps=15 format=3 uid="uid://b36fxj48d8vd6"]
+
+[ext_resource type="Script" path="res://scenes/Player.gd" id="1_semds"]
+[ext_resource type="Shader" path="res://scenes/player_color.gdshader" id="2_51hkv"]
+[ext_resource type="Texture2D" uid="uid://b7wnp5vsb7xo7" path="res://sprites/temporary/preview_idle_green.png" id="3_418gi"]
+[ext_resource type="Script" path="res://scenes/NameLabel.gd" id="4_fjjhq"]
+[ext_resource type="Texture2D" uid="uid://ygmdyueil2oh" path="res://sprites/temporary/m_1.png" id="4_i0pcl"]
+[ext_resource type="AudioStream" uid="uid://caldq66w6hp6q" path="res://sounds/temporary/pistol_reload.mp3" id="5_i3qj7"]
+[ext_resource type="Script" path="res://scenes/MuzzleFlashSprite2D.gd" id="5_uunbc"]
+[ext_resource type="Script" path="res://scenes/WeaponHandler.gd" id="6_yxoxc"]
+[ext_resource type="AudioStream" uid="uid://ccmajdwc71kug" path="res://sounds/temporary/gun_aim_out.mp3" id="7_6rhqb"]
+[ext_resource type="AudioStream" uid="uid://hdm3ciorjt0c" path="res://sounds/weapons/GunshotPistol1.wav" id="8_a5d43"]
+[ext_resource type="AudioStream" uid="uid://gg11nrsefsml" path="res://sounds/temporary/gun_aim_in.mp3" id="8_k6jdt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dq4n8"]
+resource_local_to_scene = true
+shader = ExtResource("2_51hkv")
+shader_parameter/new_color = Color(0.70342, 0.157617, 0.222915, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2lg8y"]
+radius = 16.0
+
+[sub_resource type="Theme" id="Theme_k0leo"]
+
+[node name="Player" type="CharacterBody2D" groups=["players"]]
+script = ExtResource("1_semds")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_dq4n8")
+position = Vector2(-13.033, 0)
+rotation = -1.5708
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_418gi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2lg8y")
+
+[node name="WeaponsHolder" type="Node2D" parent="."]
+
+[node name="Weapon" type="Node2D" parent="WeaponsHolder" node_paths=PackedStringArray("playerNode")]
+script = ExtResource("6_yxoxc")
+playerNode = NodePath("../..")
+
+[node name="Muzzle" type="Node2D" parent="WeaponsHolder/Weapon"]
+position = Vector2(0, -24.905)
+
+[node name="MuzzleFlashSprite2D" type="Sprite2D" parent="WeaponsHolder/Weapon/Muzzle"]
+visible = false
+rotation = -1.5708
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("4_i0pcl")
+offset = Vector2(116.535, -5.09)
+script = ExtResource("5_uunbc")
+
+[node name="MuzzleFlashTimer" type="Timer" parent="WeaponsHolder/Weapon/Muzzle/MuzzleFlashSprite2D"]
+wait_time = 0.01
+one_shot = true
+
+[node name="ReloadAudio2D" type="AudioStreamPlayer2D" parent="WeaponsHolder/Weapon"]
+stream = ExtResource("5_i3qj7")
+
+[node name="PistolShootAudio2D" type="AudioStreamPlayer2D" parent="WeaponsHolder/Weapon"]
+stream = ExtResource("8_a5d43")
+volume_db = 3.586
+
+[node name="GunAimOutAudio2D" type="AudioStreamPlayer2D" parent="WeaponsHolder/Weapon"]
+stream = ExtResource("7_6rhqb")
+volume_db = -9.324
+
+[node name="GunAimInAudio2D" type="AudioStreamPlayer2D" parent="WeaponsHolder/Weapon"]
+stream = ExtResource("8_k6jdt")
+volume_db = -9.324
+
+[node name="ReloadTimer" type="Timer" parent="WeaponsHolder/Weapon"]
+one_shot = true
+
+[node name="AimPivotLeft" type="Node2D" parent="WeaponsHolder/Weapon"]
+rotation = -0.174533
+scale = Vector2(1, 1)
+
+[node name="ColorRect" type="ColorRect" parent="WeaponsHolder/Weapon/AimPivotLeft"]
+custom_minimum_size = Vector2(1, 10)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_right = 1.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+theme = SubResource("Theme_k0leo")
+metadata/_edit_use_anchors_ = true
+
+[node name="AimLineLeftRayCast2D" type="RayCast2D" parent="WeaponsHolder/Weapon/AimPivotLeft"]
+target_position = Vector2(0, -1000)
+
+[node name="AimPivotRight" type="Node2D" parent="WeaponsHolder/Weapon"]
+rotation = 0.174533
+scale = Vector2(1, 1)
+
+[node name="ColorRect" type="ColorRect" parent="WeaponsHolder/Weapon/AimPivotRight"]
+custom_minimum_size = Vector2(1, 10)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_right = 1.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+theme = SubResource("Theme_k0leo")
+
+[node name="AimLineRightRayCast2D" type="RayCast2D" parent="WeaponsHolder/Weapon/AimPivotRight"]
+target_position = Vector2(0, -1000)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Node2D" type="Node2D" parent="Node2D"]
+position = Vector2(0, -40.065)
+
+[node name="NameLabel" type="Label" parent="Node2D/Node2D"]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0.0166664, 1)
+z_index = 100
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = -23.0
+offset_right = 36.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "PLAYER 1"
+horizontal_alignment = 1
+script = ExtResource("4_fjjhq")
+
+[connection signal="timeout" from="WeaponsHolder/Weapon/Muzzle/MuzzleFlashSprite2D/MuzzleFlashTimer" to="WeaponsHolder/Weapon/Muzzle/MuzzleFlashSprite2D" method="_on_muzzle_flash_timer_timeout"]
+[connection signal="timeout" from="WeaponsHolder/Weapon/ReloadTimer" to="WeaponsHolder/Weapon" method="_on_reload_timer_timeout"]

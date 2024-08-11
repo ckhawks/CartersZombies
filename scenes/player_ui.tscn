@@ -1,0 +1,287 @@
+[gd_scene load_steps=15 format=3 uid="uid://de6sojovjakps"]
+
+[ext_resource type="Script" path="res://scenes/CreditsUI.gd" id="1_dnlke"]
+[ext_resource type="Script" path="res://scenes/player_ui.gd" id="1_e0ibp"]
+[ext_resource type="Script" path="res://scenes/AmmoUI.gd" id="2_laaxf"]
+[ext_resource type="Texture2D" uid="uid://c2mk7f6m8r805" path="res://sprites/icon-reload.png" id="3_cn8tb"]
+[ext_resource type="Script" path="res://scenes/CreditsFlying.gd" id="3_qud0b"]
+[ext_resource type="Script" path="res://scenes/WavesUI.gd" id="4_moy1k"]
+[ext_resource type="FontFile" uid="uid://dauhl3vqov0v3" path="res://fonts/Retro Team.otf" id="5_2vxg5"]
+[ext_resource type="Texture2D" uid="uid://wn462bxlpkki" path="res://sprites/weapon_icons/pistol_glock.png" id="6_ejb22"]
+[ext_resource type="Texture2D" uid="uid://sdgjmlxqgxal" path="res://sprites/weapon_icons/sniper_awp.png" id="9_bhy61"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_juup4"]
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.286275)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="Animation" id="Animation_624ke"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/WaveLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_urlsi"]
+resource_name = "wavestarting"
+length = 5.994
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/WaveLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.9, 2, 3, 4, 4.9985, 5.994),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [null, Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_18k2b"]
+_data = {
+"RESET": SubResource("Animation_624ke"),
+"wavestarting": SubResource("Animation_urlsi")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nx0d3"]
+bg_color = Color(0, 0, 0, 0.160784)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_e0ibp")
+
+[node name="CreditsUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.1
+offset_top = -28.52
+offset_right = 45.2
+offset_bottom = 11.48
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_dnlke")
+
+[node name="CreditsFlying" type="Label" parent="CreditsUI"]
+process_mode = 4
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 15.85
+offset_top = -11.5
+offset_right = 47.85
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+text = "+¢ 0"
+horizontal_alignment = 2
+script = ExtResource("3_qud0b")
+
+[node name="PanelContainer" type="PanelContainer" parent="CreditsUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_juup4")
+
+[node name="CreditsLabel" type="Label" parent="CreditsUI/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+text = "¢ 0"
+horizontal_alignment = 2
+
+[node name="AmmoUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.1
+offset_top = 18.83
+offset_right = 45.2
+offset_bottom = 58.825
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("2_laaxf")
+
+[node name="PanelContainer" type="PanelContainer" parent="AmmoUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_juup4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AmmoUI/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="AmmoUI/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="AmmoUI/PanelContainer/HBoxContainer/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("3_cn8tb")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="AmmoLabel" type="Label" parent="AmmoUI/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+text = "7 / 7"
+horizontal_alignment = 2
+
+[node name="WavesUI" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1920.0
+offset_right = 1920.0
+script = ExtResource("4_moy1k")
+
+[node name="MarginContainer" type="MarginContainer" parent="WavesUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -156.0
+offset_bottom = 86.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+
+[node name="WaveLabel" type="Label" parent="WavesUI/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("5_2vxg5")
+theme_override_font_sizes/font_size = 66
+text = "1"
+horizontal_alignment = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WavesUI"]
+libraries = {
+"": SubResource("AnimationLibrary_18k2b")
+}
+
+[node name="WeaponUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 106.455
+offset_right = 40.0
+offset_bottom = 146.455
+
+[node name="PanelContainer" type="PanelContainer" parent="WeaponUI"]
+layout_mode = 2
+offset_right = 134.0
+offset_bottom = 152.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nx0d3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponUI/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="WeaponUI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WeaponUI/PanelContainer/VBoxContainer/MarginContainer4"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WeaponUI/PanelContainer/VBoxContainer/MarginContainer4/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "1"
+
+[node name="TextureRect" type="TextureRect" parent="WeaponUI/PanelContainer/VBoxContainer/MarginContainer4/HBoxContainer"]
+modulate = Color(1, 1, 1, 0.145098)
+custom_minimum_size = Vector2(144.545, 72.645)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("9_bhy61")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponUI/PanelContainer/VBoxContainer/MarginContainer4/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="WeaponUI/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WeaponUI/PanelContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WeaponUI/PanelContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "2"
+
+[node name="TextureRect2" type="TextureRect" parent="WeaponUI/PanelContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(144.545, 72.645)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("6_ejb22")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="WeaponUI"]
+visible = false
+custom_minimum_size = Vector2(34.11, 31.62)
+layout_mode = 2
+offset_left = -6.195
+offset_top = -6.84
+offset_right = 1017.8
+offset_bottom = 505.16
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_bhy61")
+
+[node name="TextureRect2" type="TextureRect" parent="WeaponUI"]
+visible = false
+custom_minimum_size = Vector2(34.11, 31.62)
+layout_mode = 2
+offset_left = -7.0
+offset_top = 61.545
+offset_right = 1017.0
+offset_bottom = 573.545
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_ejb22")

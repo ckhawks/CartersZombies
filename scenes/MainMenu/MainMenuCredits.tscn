@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci5ouj21h1cgy"]
+
+[ext_resource type="Texture2D" uid="uid://dr6aqvxqtqkxs" path="res://sprites/temporary/main_menu_bg.png" id="1_yrbio"]
+[ext_resource type="Script" path="res://scenes/MainMenu/CreditsBackButton.gd" id="2_xa0km"]
+[ext_resource type="FontFile" uid="uid://dauhl3vqov0v3" path="res://fonts/Retro Team.otf" id="3_xttxt"]
+
+[node name="MainMenuCredits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_yrbio")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 453.0
+offset_bottom = 423.0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_bottom = 16
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Back to Main Menu"
+script = ExtResource("2_xa0km")
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xttxt")
+theme_override_font_sizes/font_size = 100
+text = "Credits"
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Game made for THE BOYS
+
+Programming:  Stellaric
+Sound Design:  Chasroth
+Game Design:  Stellaric, Chasroth, DeadNotSleeping, Lordofpoop
+Playtesting:  Stellaric, Chasroth, DeadNotSleeping, Lordofpoop, Eisel Leon"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/BackButton" to="MarginContainer/VBoxContainer/MarginContainer/BackButton" method="_on_pressed"]

@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://cl1vmriix40ni"]
+
+[ext_resource type="Texture2D" uid="uid://fi7qrsvyngmg" path="res://sprites/temporary/preview_idle.png" id="1_2f7qh"]
+[ext_resource type="Script" path="res://scenes/Player.gd" id="1_eolen"]
+[ext_resource type="Resource" uid="uid://d4y6x37ekkte" path="res://p1_controls_gp.tres" id="2_ld1fo"]
+[ext_resource type="PackedScene" uid="uid://cidpu5owj0tmr" path="res://scenes/wall_temp.tscn" id="4_vflt0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2lg8y"]
+radius = 16.0
+
+[sub_resource type="Theme" id="Theme_k0leo"]
+
+[node name="StartingLevel" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.227451, 0.227451, 0.227451, 0.0862745)
+position = Vector2(578.5, 301)
+scale = Vector2(10.0391, 5.70313)
+texture = ExtResource("1_2f7qh")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(91.033, 104)
+script = ExtResource("1_eolen")
+playerIdx = null
+controls = ExtResource("2_ld1fo")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+rotation = -1.5708
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_2f7qh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_2lg8y")
+
+[node name="AimPivotLeft" type="Node2D" parent="Player"]
+rotation = -0.174533
+
+[node name="ColorRect" type="ColorRect" parent="Player/AimPivotLeft"]
+custom_minimum_size = Vector2(1, 10)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_right = 1.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+theme = SubResource("Theme_k0leo")
+
+[node name="AimLineLeftRayCast2D" type="RayCast2D" parent="Player/AimPivotLeft"]
+scale = Vector2(1, 1)
+target_position = Vector2(0, -1000)
+
+[node name="AimPivotRight" type="Node2D" parent="Player"]
+rotation = 0.174533
+
+[node name="ColorRect" type="ColorRect" parent="Player/AimPivotRight"]
+custom_minimum_size = Vector2(1, 10)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_right = 1.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+theme = SubResource("Theme_k0leo")
+
+[node name="AimLineRightRayCast2D" type="RayCast2D" parent="Player/AimPivotRight"]
+scale = Vector2(1, 1)
+target_position = Vector2(0, -1000)
+
+[node name="ReloadTimer" type="Timer" parent="Player"]
+
+[node name="Muzzle" type="Node2D" parent="Player"]
+position = Vector2(0, -24.905)
+
+[node name="wallTemp" parent="." instance=ExtResource("4_vflt0")]
+position = Vector2(717, 749)
+scale = Vector2(12.4656, 0.148129)
+
+[node name="wallTemp2" parent="." instance=ExtResource("4_vflt0")]
+position = Vector2(1076, 292)
+scale = Vector2(12.4656, 0.148129)
+
+[node name="wallTemp3" parent="." instance=ExtResource("4_vflt0")]
+position = Vector2(748, -18)
+rotation = 0.783522
+scale = Vector2(12.4656, 0.148129)
+
+[connection signal="timeout" from="Player/ReloadTimer" to="Player" method="_on_reload_timer_timeout"]

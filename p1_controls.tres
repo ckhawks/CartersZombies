@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ControlsResource" load_steps=2 format=3 uid="uid://df0mukm0i0smc"]
+
+[ext_resource type="Script" path="res://resources/ControlsResource.gd" id="1_to8gp"]
+
+[resource]
+script = ExtResource("1_to8gp")
+move_left = "p1_move_left"
+move_right = "p1_move_right"
+move_up = "p1_move_up"
+move_down = "p1_move_down"
+look_left = "p1_look_left"
+look_right = "p1_look_right"
+look_up = "p1_look_up"
+look_down = "p1_look_down"
+primary_fire = "p1_primary_fire"
+secondary_fire = "p1_secondary_fire"
+interact = "p1_interact"
+reload = "p1_reload"
+movement = "p1_movement"
+sprint = "p1_sprint"
